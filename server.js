@@ -2,8 +2,14 @@ const express = require("express");
 const PDFDocument = require("pdfkit");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
+// Ruta raíz para evitar el error "Cannot GET /"
+app.get("/", (req, res) => {
+    res.send("¡Bienvenido a la API de generación de PDFs! 🚀 Prueba /generate-pdf");
+});
+
+// Ruta para generar PDF
 app.get("/generate-pdf", (req, res) => {
     const doc = new PDFDocument();
     let buffers = [];
@@ -22,10 +28,7 @@ app.get("/generate-pdf", (req, res) => {
     doc.end();
 });
 
-app.get("/", (req, res) => {
-    res.send("¡Bienvenido a la API de generación de PDFs! 🚀 Prueba /generate-pdf");
-});
-
+// Iniciar servidor en el puerto asignado por Render
 app.listen(PORT, () => {
     console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });
