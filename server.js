@@ -22,6 +22,10 @@ app.get("/generate-pdf", (req, res) => {
     doc.end();
 });
 
+app.get("/", (req, res) => {
+    res.send("¡Bienvenido a la API de generación de PDFs! 🚀 Prueba /generate-pdf");
+});
+
 app.listen(PORT, () => {
     console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });
